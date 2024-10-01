@@ -14,10 +14,10 @@ install_xrt() {
 }
 
 install_dpdk() {
-    cp /proj/octfpga-PG0/tools/dpdk.sh /opt/.
+    cp /local/repository/dpdk.sh /opt/.
     cd /opt/
-    echo "running dpdk.sh $3"
-    ./dpdk.sh $3
+    echo "running dpdk.sh $DPDKVERSION"
+    ./dpdk.sh $DPDKVERSION
 }
 install_init_script() {
     cp /proj/octfpga-PG0/tools/zhhan/init.sh /users/zhhan/.
