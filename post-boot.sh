@@ -195,7 +195,9 @@ disable_pcie_fatal_error
 
 install_init_script
 install_config_fpga
-install_dpdk
+if [ ! -d /opt/dpdk/ ]; then
+    install_dpdk
+fi
 
 if [ "$WORKFLOW" = "Vitis" ] ; then
     check_shellpkg
