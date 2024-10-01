@@ -14,9 +14,9 @@ install_xrt() {
 }
 
 install_dpdk() {
-    cp /proj/octfpga-PG0/tools/dpdk.sh /opt/.
+    cp /local/repository/dpdk.sh /opt/.
     cd /opt/
-    ./dpdk.sh
+    ./dpdk.sh $3
 }
 install_init_script() {
     cp /proj/octfpga-PG0/tools/zhhan/init.sh /users/zhhan/.
@@ -159,6 +159,7 @@ VERSION_ID=`echo $VERSION_ID | tr -d '"'`
 OSVERSION="$OSVERSION-$VERSION_ID"
 WORKFLOW=$1
 TOOLVERSION=$2
+DPDKVERSION=$3
 VITISVERSION="2023.1"
 SCRIPT_PATH=/local/repository
 COMB="${TOOLVERSION}_${OSVERSION}"

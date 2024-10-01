@@ -30,6 +30,8 @@ workflow = [('Vitis'), ('Vivado')]
 
 toolVersion = [('2023.1')] 
 
+dpdkVersion = [('20_11'), ('22_11')]
+
 pc.defineParameter("nodes","List of nodes",
                    portal.ParameterType.STRING,"",
                    longDescription="Comma-separated list of nodes (e.g., pc151,pc153). Please check the list of available nodes within the Mass cluster at https://www.cloudlab.us/cluster-status.php before you specify the nodes.")
@@ -43,6 +45,12 @@ pc.defineParameter("toolVersion", "Tool Version",
                    portal.ParameterType.STRING,
                    toolVersion[0], toolVersion,
                    longDescription="Select a tool version. It is recommended to use the latest version for the deployment workflow. For more information, visit https://www.xilinx.com/products/boards-and-kits/alveo/u280.html#gettingStarted")   
+
+pc.defineParameter("dpdkVersion", "DPDK Version",
+                   portal.ParameterType.STRING,
+                   dpdkVersion[0], dpdkVersion,
+                   longDescription="Select a DPDK version. DPDK-22_11 is for Vivado 2023.1 and DPDK_20_11 is for Vivado 2021.2")   
+
 pc.defineParameter("osImage", "Select Image",
                    portal.ParameterType.IMAGE,
                    imageList[0], imageList,
@@ -98,7 +106,7 @@ for nodeName in nodeList:
         bs.placement = "any"
 
     if params.toolVersion != "Do not install tools":
-        host.addService(pg.Execute(shell="bash", command="sudo /local/repository/post-boot.sh " + params.workflow + " " + params.toolVersion + " >> /local/logs/output_log.txt"))
+        host.addService(pg.Execute(shell="bash", command="sudo /local/repository/post-boot.sh " + params.workflow + " " + params.toolVersion + " " + params.dpdkVersion + " >> /local/logs/output_log.txt"))
 
     # Since we want to create network links to the FPGA, it has its own identity.
     fpga = request.RawPC("fpga-" + nodeName)
