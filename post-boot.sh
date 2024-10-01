@@ -14,7 +14,7 @@ install_xrt() {
 }
 
 install_dpdk() {
-    cp /local/repository/dpdk.sh /opt/.
+    cp /proj/octfpga-PG0/tools/dpdk.sh /opt/.
     cd /opt/
     ./dpdk.sh $3
 }
