@@ -19,11 +19,6 @@ install_dpdk() {
     echo "running dpdk.sh $DPDKVERSION"
     ./dpdk.sh $DPDKVERSION
 }
-install_init_script() {
-    cp /proj/octfpga-PG0/tools/zhhan/init.sh /users/zhhan/.
-    cd /users/zhhan/.
-    sudo -u zhhan ./init.sh
-}
 
 install_shellpkg() {
 
@@ -188,7 +183,6 @@ install_libs
 # Disable PCIe fatal error reporting
 disable_pcie_fatal_error 
 
-install_init_script
 install_config_fpga
 if [ ! -d /opt/dpdk/ ]; then
     install_dpdk
